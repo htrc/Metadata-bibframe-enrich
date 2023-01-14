@@ -59,7 +59,7 @@ trait AsciiSet {
 /** An inclusive range of ASCII characters */
 private[encoding] final class AsciiRange(first: Int, last: Int) extends AsciiSet {
   assert(first >= 0 && first < last && last < 256)
-  override def toString: String                            = s"(${Integer.toHexString(first)}- ${Integer.toHexString(last)})"
+  override def toString: String = s"(${Integer.toHexString(first)}- ${Integer.toHexString(last)})"
   private[encoding] override def getInternal(i: Int): Boolean = i >= first && i <= last
 }
 private[encoding] object AsciiRange {
@@ -85,11 +85,11 @@ private[encoding] final class AsciiUnion(a: AsciiSet, b: AsciiSet) extends Ascii
  * building an [[AsciiSet]] then calling `toBitSet` on it.
  */
 private[encoding] final class AsciiBitSet private[encoding] (bitSet: JBitSet) extends AsciiSet {
-  final def get(i: Int): Boolean = {
+  def get(i: Int): Boolean = {
     if (i < 0 || i > 255)
       throw new IllegalArgumentException(s"Character $i cannot match AsciiSet because it is out of range")
     getInternal(i)
   }
   private[encoding] override def getInternal(i: Int): Boolean = bitSet.get(i)
-  override def toBitSet: AsciiBitSet                       = this
+  override def toBitSet: AsciiBitSet = this
 }
