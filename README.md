@@ -1,5 +1,5 @@
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/htrc/Metadata-bibframe-enrich/ci.yml?branch=main)](https://github.com/htrc/Metadata-bibframe-enrich/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/github/htrc/Metadata-bibframe-entities/graph/badge.svg?token=2y6GAtWfnP)](https://codecov.io/github/htrc/Metadata-bibframe-entities)
+[![codecov](https://codecov.io/github/htrc/Metadata-bibframe-enrich/graph/badge.svg?token=XkFacP7b0K)](https://codecov.io/github/htrc/Metadata-bibframe-enrich)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/htrc/Metadata-bibframe-enrich?include_prereleases&sort=semver)](https://github.com/htrc/Metadata-bibframe-enrich/releases/latest)
 
 # Metadata-bibframe-enrich
