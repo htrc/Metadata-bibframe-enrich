@@ -62,6 +62,12 @@ class Conf(args: Seq[String]) extends ScallopConf(args) {
     argName = "DIR"
   )
 
+  val saveAsSeqFile: ScallopOption[Boolean] = opt[Boolean]("save-as-seq",
+    descr = "Saves the EF files as Hadoop sequence files",
+    required = false,
+    default = Some(false)
+  )
+
   val inputPath: ScallopOption[File] = trailArg[File]("input",
     descr = "The path to the folder containing the Bibframe XML sequence files to process"
   )
