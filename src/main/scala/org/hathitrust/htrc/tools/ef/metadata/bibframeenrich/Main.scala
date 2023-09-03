@@ -81,7 +81,7 @@ object Main {
         .flatMap { case (k, e) => Try(Helper.enrichVolume(e, entitiesBcast.value)) match {
           case Success(result) => Some(k -> result.toString())
           case Failure(t) =>
-            logger.error(s"enrichVolume: id=$k", t)
+            logger.error(s"enrichVolume: ids=$k", t)
             None
         }
         }
@@ -89,10 +89,14 @@ object Main {
       if (saveAsSeqFile)
         enrichedBibframeXmlRDD.saveAsSequenceFile(outputPath + "/enriched")
       else
-        enrichedBibframeXmlRDD.foreach { case (id, xml) =>
-          val fname = id.replace(":", "+").replace("/", "=")
-          Using.resource(new PrintWriter(new File(outputPath, fname + ".xml"), "UTF-8"))(_.print(xml))
-        }
+        enrichedBibframeXmlRDD
+          .flatMap { case (ids, xml) =>
+            ids.split('|').map(id => id -> xml)
+          }
+          .foreach { case (id, xml) =>
+            val fname = id.replace(":", "+").replace("/", "=")
+            Using.resource(new PrintWriter(new File(outputPath, fname + ".xml"), "UTF-8"))(_.print(xml))
+          }
 
       //    if (xmlParseErrorAccumulator.nonEmpty || xmlEnrichErrorAccumulator.nonEmpty)
       if (xmlParseErrorAccumulator.nonEmpty)
